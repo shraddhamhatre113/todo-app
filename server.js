@@ -16,7 +16,7 @@ const adapter = new JSONFile('db.json');
 export const db = new Low(adapter);
 await db.read();
 // initialize database
-db.data ||= { users: [] };
+db.data || { users: [] };
 // core middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
