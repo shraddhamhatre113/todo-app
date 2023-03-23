@@ -1,7 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { Low, JSONFile } from 'lowdb';
+import { Low } from 'lowdb';
+import {JSONFile} from 'lowdb/node'
 
 import { mainErrorHandler, noRouteHandler } from './middlewares/errorHandle.middleware.js';
 import { userRouter } from './routers/users.router.js';
@@ -16,7 +17,7 @@ const adapter = new JSONFile('db.json');
 export const db = new Low(adapter);
 await db.read();
 // initialize database
-db.data || { users: [] };
+db.data = db.data || { users: [] };
 // core middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
